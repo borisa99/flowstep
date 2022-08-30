@@ -1,0 +1,2 @@
+CREATE TABLE "public"."collection_flows" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "collection_id" uuid NOT NULL, "flow_screencast_id" uuid NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("flow_screencast_id") REFERENCES "public"."flow_screencasts"("id") ON UPDATE restrict ON DELETE cascade, FOREIGN KEY ("collection_id") REFERENCES "public"."collections"("id") ON UPDATE restrict ON DELETE cascade);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

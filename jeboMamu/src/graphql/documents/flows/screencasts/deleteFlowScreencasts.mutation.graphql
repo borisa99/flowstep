@@ -1,0 +1,7 @@
+mutation DeleteFlowScreencasts($ids: [uuid!]!, $flow_id: uuid!) {
+  delete_flow_screencasts(
+    where: { id: { _nin: $ids }, flow_id: { _eq: $flow_id } }
+  ) {
+    affected_rows
+  }
+}

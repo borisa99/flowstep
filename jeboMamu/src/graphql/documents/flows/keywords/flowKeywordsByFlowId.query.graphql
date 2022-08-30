@@ -1,0 +1,5 @@
+query FlowKeywordsByFlowId($flow_id: uuid!) {
+  flow_keywords(where: { flow_id: { _eq: $flow_id } }) {
+    ...FlowKeyword
+  }
+}

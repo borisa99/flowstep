@@ -1,0 +1,11 @@
+query FlowScreencastById($id: uuid!) {
+  flow_screencasts_by_pk(id: $id) {
+    ...FlowScreencast
+    flow_screencast_timestamps {
+      ...FlowScreencastTimestamp
+    }
+    flow_screencast_components {
+      ...FlowScreencastComponent
+    }
+  }
+}

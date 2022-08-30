@@ -1,0 +1,18 @@
+mutation UpsertFlowAppInfo($object: flow_app_info_insert_input!) {
+  insert_flow_app_info_one(
+    object: $object
+    on_conflict: {
+      constraint: flow_app_info_pkey
+      update_columns: [
+        category
+        app_store_link
+        average_rating
+        developer
+        number_of_downloads
+        website
+      ]
+    }
+  ) {
+    id
+  }
+}

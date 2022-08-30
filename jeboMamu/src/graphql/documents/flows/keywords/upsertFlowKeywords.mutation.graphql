@@ -1,0 +1,8 @@
+mutation UpsertFlowKeywords($object: [flow_keywords_insert_input!]!) {
+  insert_flow_keywords(
+    objects: $object
+    on_conflict: { constraint: flow_keywords_pkey }
+  ) {
+    affected_rows
+  }
+}

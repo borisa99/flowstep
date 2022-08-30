@@ -1,0 +1,17 @@
+query FlowById($id: uuid!) {
+  flows_by_pk(id: $id) {
+    ...Flow
+    flow_screencasts {
+      ...FlowScreencast
+    }
+    flow_screenshots {
+      ...FlowScreenshot
+    }
+    flow_keywords {
+      ...FlowKeyword
+    }
+    flow_attachments {
+      ...FlowAttachment
+    }
+  }
+}

@@ -1,0 +1,16 @@
+mutation UpdateUser(
+  $first_name: String
+  $last_name: String
+  $avatar_url: String
+) {
+  update_users(
+    where: {}
+    _set: {
+      first_name: $first_name
+      last_name: $last_name
+      avatar_url: $avatar_url
+    }
+  ) {
+    affected_rows
+  }
+}

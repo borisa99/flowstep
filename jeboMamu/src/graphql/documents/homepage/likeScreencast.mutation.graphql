@@ -1,0 +1,7 @@
+mutation LikeScreencast($flow_screencast_id: uuid!) {
+  insert_flow_screencast_likes_one(
+    object: { flow_screencast_id: $flow_screencast_id }
+  ) {
+    id
+  }
+}

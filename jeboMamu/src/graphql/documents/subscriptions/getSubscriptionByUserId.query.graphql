@@ -1,0 +1,13 @@
+query GetSubscriptionByUserId($user_id: uuid) {
+  user_subscriptions(
+    where: { user_id: { _eq: $user_id } }
+    order_by: { updated_at: desc }
+  ) {
+    subscription_plan {
+      id
+      title
+      price
+      subscription_plan_type
+    }
+  }
+}

@@ -1,0 +1,45 @@
+table:
+  schema: public
+  name: collection_flows
+object_relationships:
+  - name: collection
+    using:
+      foreign_key_constraint_on: collection_id
+  - name: flow_screencast
+    using:
+      foreign_key_constraint_on: flow_screencast_id
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        collection:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+        - collection_id
+        - flow_screencast_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - collection_id
+        - flow_screencast_id
+        - id
+      filter:
+        _or:
+          - collection:
+              collection_visibility_value:
+                _eq: Public
+          - collection:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+delete_permissions:
+  - role: user
+    permission:
+      backend_only: false
+      filter:
+        collection:
+          user_id:
+            _eq: X-Hasura-User-Id

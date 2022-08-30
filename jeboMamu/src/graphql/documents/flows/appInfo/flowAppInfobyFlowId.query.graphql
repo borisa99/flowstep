@@ -1,0 +1,5 @@
+query FlowAppInfoByFlowId($flow_id: uuid!) {
+  flow_app_info(where: { flow_id: { _eq: $flow_id } }) {
+    ...FlowAppInfo
+  }
+}

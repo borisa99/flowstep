@@ -1,0 +1,212 @@
+table:
+  schema: public
+  name: flow_screencasts
+object_relationships:
+  - name: flow
+    using:
+      foreign_key_constraint_on: flow_id
+  - name: flow_screencast_details
+    using:
+      foreign_key_constraint_on:
+        column: flow_screencast_id
+        table:
+          schema: public
+          name: flow_screencast_details
+array_relationships:
+  - name: collection_flows
+    using:
+      foreign_key_constraint_on:
+        column: flow_screencast_id
+        table:
+          schema: public
+          name: collection_flows
+  - name: flow_screencast_components
+    using:
+      foreign_key_constraint_on:
+        column: flow_screencast_id
+        table:
+          schema: public
+          name: flow_screencast_components
+  - name: flow_screencast_likes
+    using:
+      foreign_key_constraint_on:
+        column: flow_screencast_id
+        table:
+          schema: public
+          name: flow_screencast_likes
+  - name: flow_screencast_timestamps
+    using:
+      foreign_key_constraint_on:
+        column: flow_screencast_id
+        table:
+          schema: public
+          name: flow_screencast_timestamps
+  - name: flow_screencasts_badges
+    using:
+      foreign_key_constraint_on:
+        column: flow_screencast_id
+        table:
+          schema: public
+          name: flow_screencasts_badges
+computed_fields:
+  - name: is_liked
+    definition:
+      function:
+        schema: public
+        name: is_screencast_liked
+      session_argument: hasura_session
+    comment: ""
+  - name: is_saved
+    definition:
+      function:
+        schema: public
+        name: is_screencast_saved
+      session_argument: hasura_session
+insert_permissions:
+  - role: premium
+    permission:
+      check: {}
+      columns:
+        - banner_url
+        - created_at
+        - flow_id
+        - id
+        - screencast_url
+        - title
+        - updated_at
+  - role: super_admin
+    permission:
+      check: {}
+      columns:
+        - banner_url
+        - created_at
+        - flow_id
+        - id
+        - screencast_url
+        - title
+        - updated_at
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - banner_url
+        - created_at
+        - flow_id
+        - id
+        - screencast_url
+        - title
+        - updated_at
+      computed_fields:
+        - is_liked
+        - is_saved
+      filter:
+        _or:
+          - flow:
+              is_draft:
+                _eq: false
+          - flow:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - id
+        - title
+        - flow_id
+        - created_at
+        - updated_at
+        - banner_url
+        - screencast_url
+      computed_fields:
+        - is_liked
+        - is_saved
+      filter:
+        flow:
+          is_draft:
+            _eq: false
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - banner_url
+        - created_at
+        - flow_id
+        - id
+        - screencast_url
+        - title
+        - updated_at
+      computed_fields:
+        - is_liked
+        - is_saved
+      filter:
+        _or:
+          - flow:
+              is_draft:
+                _eq: false
+          - flow:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - banner_url
+        - created_at
+        - flow_id
+        - id
+        - screencast_url
+        - title
+        - updated_at
+      computed_fields:
+        - is_liked
+        - is_saved
+      filter:
+        _or:
+          - flow:
+              is_draft:
+                _eq: false
+          - flow:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: premium
+    permission:
+      columns:
+        - title
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      columns:
+        - title
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: premium
+    permission:
+      backend_only: false
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      backend_only: false
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id

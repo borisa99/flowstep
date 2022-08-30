@@ -1,0 +1,7 @@
+mutation UnlikeScreencast($flow_screencast_id: uuid!) {
+  delete_flow_screencast_likes(
+    where: { flow_screencast_id: { _eq: $flow_screencast_id } }
+  ) {
+    affected_rows
+  }
+}

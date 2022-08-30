@@ -1,0 +1,14 @@
+mutation InsertUpdateFlow($object: flows_insert_input!) {
+  insert_flows_one(
+    object: $object
+    on_conflict: {
+      constraint: flows_pkey
+      update_columns: [title, avatar_url, avatar_background_color, is_draft]
+    }
+  ) {
+    id
+    flow_screencasts {
+      id
+    }
+  }
+}

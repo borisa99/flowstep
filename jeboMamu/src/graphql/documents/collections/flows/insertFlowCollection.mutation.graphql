@@ -1,0 +1,13 @@
+mutation InsertFlowCollection(
+  $collection_id: uuid!
+  $flow_screencast_id: uuid!
+) {
+  insert_collection_flows_one(
+    object: {
+      collection_id: $collection_id
+      flow_screencast_id: $flow_screencast_id
+    }
+  ) {
+    id
+  }
+}

@@ -1,0 +1,13 @@
+mutation DeletCollectionFlow(
+  $collection_id: uuid!
+  $flow_screencast_id: uuid!
+) {
+  delete_collection_flows(
+    where: {
+      collection_id: { _eq: $collection_id }
+      flow_screencast_id: { _eq: $flow_screencast_id }
+    }
+  ) {
+    affected_rows
+  }
+}

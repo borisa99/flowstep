@@ -1,0 +1,12 @@
+query Me {
+  me {
+    id
+    avatar_url
+    account_id
+    first_name
+    account_id
+    email
+    roles
+    created_at
+  }
+}

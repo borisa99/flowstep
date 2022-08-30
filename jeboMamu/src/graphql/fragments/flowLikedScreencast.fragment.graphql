@@ -1,0 +1,25 @@
+fragment FlowLikedScreencast on flow_screencast_likes {
+  id
+  flow_screencast_id
+  user_id
+  created_at
+  flow_screencast {
+    banner_url
+    flow_id
+    screencast_url
+    title
+    id
+    updated_at
+    created_at
+    flow {
+      id
+      avatar_background_color
+      avatar_url
+      created_at
+      is_draft
+      title
+      updated_at
+      user_id
+    }
+  }
+}

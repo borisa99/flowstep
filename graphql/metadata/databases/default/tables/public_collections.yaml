@@ -1,0 +1,63 @@
+table:
+  schema: public
+  name: collections
+object_relationships:
+  - name: collection_badge
+    using:
+      foreign_key_constraint_on: collection_badge_value
+  - name: collection_visibility
+    using:
+      foreign_key_constraint_on: collection_visibility_value
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+array_relationships:
+  - name: collection_flows
+    using:
+      foreign_key_constraint_on:
+        column: collection_id
+        table:
+          schema: public
+          name: collection_flows
+computed_fields:
+  - name: is_screencast_in_collection
+    definition:
+      function:
+        schema: public
+        name: is_screencast_in_collection
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+        - avatar_backgorund_color
+        - avatar_url
+        - collection_badge_value
+        - collection_visibility_value
+        - id
+        - title
+        - user_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - avatar_backgorund_color
+        - avatar_url
+        - collection_badge_value
+        - collection_visibility_value
+        - title
+        - created_at
+        - updated_at
+        - id
+        - user_id
+      computed_fields:
+        - is_screencast_in_collection
+      filter:
+        _or:
+          - collection_visibility_value:
+              _eq: Public
+          - user_id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true

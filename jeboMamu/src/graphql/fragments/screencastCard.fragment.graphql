@@ -1,0 +1,6 @@
+fragment ScreencastCard on flow_screencasts {
+  ...FlowScreencast
+  flow {
+    ...Flow
+  }
+}

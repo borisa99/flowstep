@@ -1,0 +1,7 @@
+fragment FlowAttachment on flow_attachments {
+  id
+  title
+  url
+  created_at
+  updated_at
+}

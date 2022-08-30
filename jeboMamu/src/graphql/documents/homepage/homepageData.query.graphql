@@ -1,0 +1,16 @@
+query HomepageData {
+  flows(
+    limit: 3
+    where: { is_draft: { _eq: false } }
+    order_by: { created_at: desc }
+  ) {
+    ...AppCard
+  }
+  screencasts: flow_screencasts(
+    limit: 4
+    where: { flow: { is_draft: { _eq: false } } }
+    order_by: { created_at: desc }
+  ) {
+    ...ScreencastCard
+  }
+}

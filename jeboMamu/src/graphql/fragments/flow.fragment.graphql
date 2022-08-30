@@ -1,0 +1,10 @@
+fragment Flow on flows {
+  id
+  title
+  avatar_url
+  avatar_background_color
+  is_draft
+  user_id
+  created_at
+  updated_at
+}

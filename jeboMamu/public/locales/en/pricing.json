@@ -1,0 +1,48 @@
+{
+  "title": "Go Premium",
+  "features-title": "Features",
+  "page-title": "Flowstep - Go Premium",
+  "subtitle": "Get inspired and enjoy high-quality content.",
+  "discount-20": "Save 20%",
+  "free": "Free",
+  "basic-plan-title": "Basic",
+  "premium-plan-title": "Free",
+  "current-plan": "Current plan",
+  "premium-action": "Choose Premium",
+  "basic-action": "Sign up for free",
+  "premium-payment-plan": "€ / mo",
+  "basic-payment-plan": "",
+  "premium-available-options": [
+    "Unlimited search",
+    "Unlimited collections",
+    "Unlimited search",
+    "Access to premium flows",
+    "Additonal seats (9,99€/mo each)"
+  ],
+  "basic-available-options": [
+    "3 collections",
+    "30 uploads per month",
+    "30 search results"
+  ],
+  "premium-unavailable-options": [],
+  "basic-unavailable-options": [
+    "Access to premium flows",
+    "Additional seats"
+  ],
+  "premium-short-description": "Unlimited access to everything",
+  "basic-short-description": "Enjoy community flows",
+  "premium-description": "Unlimited everything and option to invite teammates for 5€/mo per seat.",
+  "basic-description": "Access selected flows and create up to 3 private collections.",
+  "paid-monthly": "Paid monthly",
+  "paid-annually": "Paid annually",
+  "monthly": "monthly",
+  "annually": "annually",
+  "stripe-payment-error-msg": "There has been an error with the payment provider, please try later",
+  "filters-title": "Filters",
+  "filters-description": "They work as you would expect them to work",
+  "create-collections-title": "Create collections",
+  "create-collections-description": "Store your favourite designs the way you like it. Share it with others, or don't. You have all the options at hands!",
+  "premium-flows-title": "Premium flows",
+  "premium-flows-description": "Apple Watch. Revolut. N26. Wise. Bolt. Bondora. Starship. Many other apps are here as well. Enjoy watching them.",
+  "premium-only-label": "Premium only"
+}

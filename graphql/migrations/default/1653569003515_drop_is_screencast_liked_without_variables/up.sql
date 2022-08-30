@@ -1,0 +1,1 @@
+DROP FUNCTION public.is_screencast_liked(flow_screencast_row flow_screencasts);

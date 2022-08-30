@@ -1,0 +1,10 @@
+fragment FlowAppInfo on flow_app_info {
+  id
+  category
+  number_of_downloads
+  average_rating
+  website
+  developer
+  app_store_link
+  flow_id
+}

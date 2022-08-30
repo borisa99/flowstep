@@ -1,0 +1,2 @@
+CREATE TABLE "public"."flow_badge_values" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "flow_id" uuid NOT NULL, "flow_badge_value" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("flow_id") REFERENCES "public"."flows"("id") ON UPDATE restrict ON DELETE cascade, FOREIGN KEY ("flow_badge_value") REFERENCES "public"."flow_badges"("value") ON UPDATE restrict ON DELETE restrict);
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

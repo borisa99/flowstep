@@ -1,0 +1,5 @@
+query GoogleUrl {
+  google_url {
+    value
+  }
+}

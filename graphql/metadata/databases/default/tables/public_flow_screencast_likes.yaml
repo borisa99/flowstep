@@ -1,0 +1,87 @@
+table:
+  schema: public
+  name: flow_screencast_likes
+object_relationships:
+  - name: flow_screencast
+    using:
+      foreign_key_constraint_on: flow_screencast_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+        - flow_screencast_id
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - created_at
+        - flow_screencast_id
+        - id
+        - user_id
+      filter:
+        flow_screencast:
+          flow:
+            _or:
+              - is_draft:
+                  _eq: false
+              - user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - created_at
+        - flow_screencast_id
+        - id
+        - user_id
+      filter:
+        flow_screencast:
+          flow:
+            is_draft:
+              _eq: false
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - created_at
+        - flow_screencast_id
+        - id
+        - user_id
+      filter:
+        flow_screencast:
+          flow:
+            _or:
+              - is_draft:
+                  _eq: false
+              - user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - flow_screencast_id
+        - id
+        - user_id
+      filter:
+        flow_screencast:
+          flow:
+            _or:
+              - is_draft:
+                  _eq: false
+              - user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true
+delete_permissions:
+  - role: user
+    permission:
+      backend_only: false
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- DROP FUNCTION public.is_screencast_saved(flow_screencast_row flow_screencasts, hasura_session json);

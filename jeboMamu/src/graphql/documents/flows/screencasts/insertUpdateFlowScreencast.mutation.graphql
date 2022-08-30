@@ -1,0 +1,8 @@
+mutation InsertUpdateFlowScreencast($object: flow_screencasts_insert_input!) {
+  insert_flow_screencasts_one(
+    object: $object
+    on_conflict: { constraint: flow_screencasts_pkey, update_columns: [title] }
+  ) {
+    id
+  }
+}

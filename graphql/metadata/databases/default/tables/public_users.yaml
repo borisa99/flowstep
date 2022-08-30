@@ -1,0 +1,97 @@
+table:
+  schema: public
+  name: users
+object_relationships:
+  - name: account
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: accounts
+        insertion_order: null
+        column_mapping:
+          id: user_id
+  - name: user_subscription
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: user_subscriptions
+        insertion_order: null
+        column_mapping:
+          id: user_id
+array_relationships:
+  - name: collections
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: collections
+  - name: flow_screencast_likes
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: flow_screencast_likes
+  - name: flows
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: flows
+computed_fields:
+  - name: is_premium
+    definition:
+      function:
+        schema: public
+        name: is_user_premium
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - avatar_url
+        - created_at
+        - first_name
+        - id
+        - last_name
+      computed_fields:
+        - is_premium
+      filter: {}
+  - role: public
+    permission:
+      columns:
+        - avatar_url
+        - created_at
+        - first_name
+        - id
+        - last_name
+      computed_fields:
+        - is_premium
+      filter: {}
+  - role: user
+    permission:
+      columns:
+        - avatar_url
+        - created_at
+        - first_name
+        - id
+        - last_name
+      computed_fields:
+        - is_premium
+      filter: {}
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - avatar_url
+        - first_name
+        - last_name
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      check:
+        id:
+          _eq: X-Hasura-User-Id

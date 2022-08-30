@@ -1,0 +1,5 @@
+mutation DeleteFlow($id: uuid!) {
+  delete_flows_by_pk(id: $id) {
+    id
+  }
+}

@@ -1,0 +1,9 @@
+fragment FlowScreencastDetails on flow_screencast_details {
+  id
+  region
+  platform_version
+  app_version
+  #   flow_screencast_id
+  #   created_at
+  #   updated_at
+}

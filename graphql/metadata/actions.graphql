@@ -1,0 +1,110 @@
+type Mutation {
+  change_password(
+    oldPassword: String!
+    newPassword: String!
+  ): SuccessResponse
+}
+
+type Query {
+  checkEmail(
+    email: String!
+  ): SuccessResponseBoolean!
+}
+
+type Query {
+  google_url: SuccessResponse
+}
+
+type Mutation {
+  invite(
+    email: String!
+    role: String!
+  ): SuccessResponse!
+}
+
+type Mutation {
+  login(
+    email: String!
+    password: String!
+  ): JWTResponse
+}
+
+type Query {
+  me: UserResponse
+}
+
+type Mutation {
+  register(
+    user: RegisterUser!
+  ): JWTResponse
+}
+
+type Mutation {
+  request_reset_password(
+    email: String!
+  ): SuccessResponse
+}
+
+type Mutation {
+  reset_password(
+    ticket: String!
+    password: String!
+  ): JWTResponse
+}
+
+type Query {
+  stripe_session(
+    subscription_plan_id: String!
+  ): SuccessResponse
+}
+
+input RegisterUser {
+  first_name: String!
+  last_name: String
+  avatar_url: String
+  password: String!
+  email: String!
+}
+
+input SampleInput {
+  username: String!
+  password: String!
+}
+
+input GoogleProfile {
+  id: String!
+  name: String!
+  familyName: String
+  givenName: String
+  email: String!
+  imageUrl: String!
+}
+
+type JWTResponse {
+  token: String!
+  refresh_token: String!
+}
+
+type SuccessResponse {
+  value: String!
+}
+
+type UserResponse {
+  id: uuid!
+  account_id: uuid!
+  email: String!
+  first_name: String!
+  last_name: String
+  avatar_url: String
+  roles: [String!]!
+  created_at: date!
+}
+
+type SampleOutput {
+  accessToken: String!
+}
+
+type SuccessResponseBoolean {
+  value: Boolean!
+}
+

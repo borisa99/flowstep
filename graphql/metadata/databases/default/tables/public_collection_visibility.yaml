@@ -1,0 +1,12 @@
+table:
+  schema: public
+  name: collection_visibility
+is_enum: true
+array_relationships:
+  - name: collections
+    using:
+      foreign_key_constraint_on:
+        column: collection_visibility_value
+        table:
+          schema: public
+          name: collections

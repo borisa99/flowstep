@@ -1,0 +1,7 @@
+query DetailsByFlowScreencastId($flow_screencast_id: uuid!) {
+  flow_screencast_details(
+    where: { flow_screencast_id: { _eq: $flow_screencast_id } }
+  ) {
+    ...FlowScreencastDetails
+  }
+}

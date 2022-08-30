@@ -1,0 +1,9 @@
+fragment SubscriptionPlan on subscription_plans {
+  id
+  title
+  price
+  description
+  short_description
+  subscription_plan_type
+  stripe_price_id
+}

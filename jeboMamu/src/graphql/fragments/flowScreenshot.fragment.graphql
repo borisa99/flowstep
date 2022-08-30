@@ -1,0 +1,7 @@
+fragment FlowScreenshot on flow_screenshots {
+  id
+  title
+  url
+  created_at
+  updated_at
+}

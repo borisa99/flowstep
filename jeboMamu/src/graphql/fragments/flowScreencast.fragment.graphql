@@ -1,0 +1,8 @@
+fragment FlowScreencast on flow_screencasts {
+  id
+  title
+  banner_url
+  screencast_url
+  created_at
+  updated_at
+}

@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- DROP FUNCTION public.is_screencast_liked(flow_screencast_row flow_screencasts);

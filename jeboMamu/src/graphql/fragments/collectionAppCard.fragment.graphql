@@ -1,0 +1,8 @@
+fragment CollectionAppCard on collections {
+  ...Collection
+  collection_flows(limit: 1, order_by: { created_at: asc }) {
+    flow_screencast {
+      ...FlowScreencast
+    }
+  }
+}

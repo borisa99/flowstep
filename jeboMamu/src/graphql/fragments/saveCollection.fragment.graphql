@@ -1,0 +1,10 @@
+fragment SaveCollection on collections {
+  ...Collection
+  is_screencast_in_collection(args: { screencast_id: $screencast_id })
+  collection_flows_aggregate {
+    aggregate {
+      count
+    }
+  }
+}
+ 

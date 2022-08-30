@@ -1,0 +1,8 @@
+fragment FlowScreencastTimestamp on flow_screencast_timestamps {
+  id
+  title
+  timestamp
+  # flow_screencast_id
+  # created_at
+  # updated_at
+}

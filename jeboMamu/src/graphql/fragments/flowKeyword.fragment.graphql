@@ -1,0 +1,6 @@
+fragment FlowKeyword on flow_keywords {
+  id
+  value
+  created_at
+  updated_at
+}

@@ -1,0 +1,13 @@
+mutation DeleteFlowScreencastComponents(
+  $ids: [uuid!]!
+  $flow_screencast_id: uuid!
+) {
+  delete_flow_screencast_components(
+    where: {
+      id: { _nin: $ids }
+      flow_screencast_id: { _eq: $flow_screencast_id }
+    }
+  ) {
+    affected_rows
+  }
+}

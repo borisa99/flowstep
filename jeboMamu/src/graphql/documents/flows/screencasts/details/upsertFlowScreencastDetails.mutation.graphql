@@ -1,0 +1,13 @@
+mutation UpsertFlowScreencastDetails(
+  $object: flow_screencast_details_insert_input!
+) {
+  insert_flow_screencast_details_one(
+    object: $object
+    on_conflict: {
+      constraint: flow_screencast_details_pkey
+      update_columns: [app_version, platform_version, region]
+    }
+  ) {
+    id
+  }
+}

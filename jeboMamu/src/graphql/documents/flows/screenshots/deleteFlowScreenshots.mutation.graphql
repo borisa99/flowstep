@@ -1,0 +1,7 @@
+mutation DeleteFlowScreenshots($ids: [uuid!]!, $flow_id: uuid!) {
+  delete_flow_screenshots(
+    where: { id: { _nin: $ids }, flow_id: { _eq: $flow_id } }
+  ) {
+    affected_rows
+  }
+}

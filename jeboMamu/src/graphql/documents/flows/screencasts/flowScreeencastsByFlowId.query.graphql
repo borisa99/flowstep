@@ -1,0 +1,5 @@
+query FlowScreencastsByFlowId($id: uuid!) {
+  flow_screencasts(where: { flow_id: { _eq: $id } }) {
+    ...FlowScreencast
+  }
+}

@@ -1,0 +1,27 @@
+query UserProfile($id: uuid!) {
+  user: users_by_pk(id: $id) {
+    ...Profile
+  }
+  uploads: flows(
+    where: {
+      _and: [{ _and: { flow_screencasts: {} } }, { user_id: { _eq: $id } }]
+    }
+    order_by: { created_at: desc }
+  ) {
+    ...App
+  }
+  collections: collections(
+    where: {
+      _and: [
+        { _and: { collection_flows: {} } }
+        { user_id: { _eq: $id } }
+      ]
+    }
+    order_by: { created_at: desc }
+  ) {
+    ...CollectionAppCard
+  }
+  likes: flow_screencast_likes(where: { user_id: { _eq: $id } }) {
+    ...FlowLikedScreencast
+  }
+}

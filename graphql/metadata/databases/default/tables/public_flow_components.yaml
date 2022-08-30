@@ -1,0 +1,27 @@
+table:
+  schema: public
+  name: flow_components
+is_enum: true
+array_relationships:
+  - name: flow_screencast_components
+    using:
+      foreign_key_constraint_on:
+        column: flow_component_value
+        table:
+          schema: public
+          name: flow_screencast_components
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - comment
+        - value
+      filter: {}
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - comment
+        - value
+      filter: {}
+      allow_aggregations: true

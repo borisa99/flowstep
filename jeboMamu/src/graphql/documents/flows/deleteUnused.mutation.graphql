@@ -1,0 +1,28 @@
+mutation DeleteFlowUnused(
+  $screencast_ids: [uuid!]!
+  $screenshot_ids: [uuid!]!
+  $keyword_ids: [uuid!]!
+  $attachment_ids: [uuid!]!
+  $flow_id: uuid!
+) {
+  delete_flow_screencasts(
+    where: { id: { _nin: $screencast_ids }, flow_id: { _eq: $flow_id } }
+  ) {
+    affected_rows
+  }
+  delete_flow_screenshots(
+    where: { id: { _nin: $screenshot_ids }, flow_id: { _eq: $flow_id } }
+  ) {
+    affected_rows
+  }
+  delete_flow_keywords(
+    where: { id: { _nin: $keyword_ids }, flow_id: { _eq: $flow_id } }
+  ) {
+    affected_rows
+  }
+  delete_flow_attachments(
+    where: { id: { _nin: $attachment_ids }, flow_id: { _eq: $flow_id } }
+  ) {
+    affected_rows
+  }
+}

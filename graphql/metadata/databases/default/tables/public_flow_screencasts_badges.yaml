@@ -1,0 +1,92 @@
+table:
+  schema: public
+  name: flow_screencasts_badges
+object_relationships:
+  - name: flow_badge
+    using:
+      foreign_key_constraint_on: flow_badge_value
+  - name: flow_screencast
+    using:
+      foreign_key_constraint_on: flow_screencast_id
+insert_permissions:
+  - role: premium
+    permission:
+      check: {}
+      columns:
+        - id
+        - flow_screencast_id
+        - flow_badge_value
+        - created_at
+  - role: super_admin
+    permission:
+      check: {}
+      columns:
+        - id
+        - flow_screencast_id
+        - flow_badge_value
+        - created_at
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - flow_badge_value
+        - created_at
+        - flow_screencast_id
+        - id
+      filter: {}
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - flow_badge_value
+        - created_at
+        - flow_screencast_id
+        - id
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: premium
+    permission:
+      columns:
+        - flow_badge_value
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      columns:
+        - flow_badge_value
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: premium
+    permission:
+      backend_only: false
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      backend_only: false
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id

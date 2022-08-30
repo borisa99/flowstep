@@ -1,0 +1,19 @@
+table:
+  schema: public
+  name: flow_badges
+is_enum: true
+array_relationships:
+  - name: flow_badge_values
+    using:
+      foreign_key_constraint_on:
+        column: flow_badge_value
+        table:
+          schema: public
+          name: flow_badge_values
+  - name: flow_screencasts_badges
+    using:
+      foreign_key_constraint_on:
+        column: flow_badge_value
+        table:
+          schema: public
+          name: flow_screencasts_badges

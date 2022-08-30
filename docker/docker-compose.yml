@@ -1,0 +1,77 @@
+version: "3.7"
+
+services:
+  postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgrespassword}
+  hasura:
+    image: hasura/graphql-engine:v2.3.1
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      ## postgres database to store Hasura metadata
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASSWORD:-postgrespassword}@${DB_HOST:-postgres}:${DB_PORT:-5432}/${DB_NAME:-postgres}
+      ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
+      PG_DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASSWORD:-postgrespassword}@${DB_HOST:-postgres}:${DB_PORT:-5432}/${DB_NAME:-postgres}
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASSWORD:-postgrespassword}@${DB_HOST:-postgres}:${DB_PORT:-5432}/${DB_NAME:-postgres}
+      ## enable the console served by server
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false" # set to "false" to disable console
+      ## enable debugging mode. It is recommended to disable this in production
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "public"
+      ACTION_BASE_URL: "http://host.docker.internal:5000/api"
+      HASURA_GRAPHQL_JWT_SECRET: >-
+        {"type":"HS256", "key":"68zcgxChM2%UT@MyJ^eg5ecbR8kw9hFi74g8"}
+  services:
+    build:
+      context: ../flowstep-services
+      dockerfile: ../flowstep-services/Dockerfile
+    image: flowstep-services
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgres://${DB_USER:-postgres}:${DB_PASSWORD:-postgrespassword}@${DB_HOST:-postgres}:${DB_PORT:-5432}/${DB_NAME:-postgres}
+  mailhog:
+    image: mailhog/mailhog
+    logging:
+      driver: "none" # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+  web_server:
+    container_name: web_server
+    image: nginx:1.21.6-alpine
+    restart: unless-stopped
+    volumes:
+      - ./nginx:/etc/nginx/templates/
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      SERVICES_URL: "${SERVICES_URL:-services.flowstep.com}"
+      HASURA_URL: "${HASURA_URL:-api.flowstep.com}"
+    depends_on:
+      - hasura
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email ${SSL_EMAIL} -d ${SSL_ADDRESS} --agree-tos
+volumes:
+  db_data:

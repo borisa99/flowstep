@@ -1,0 +1,17 @@
+overwrite: true
+schema:
+  - ${NEXT_PUBLIC_GRAPHQL_ENDPOINT}:
+      headers:
+        x-hasura-admin-secret: ${GRAPHQL_ADMIN_SECRET}
+documents:
+  - 'src/graphql/fragments/*.fragment.graphql'
+  - 'src/graphql/documents/**/*.{query,mutation}.graphql'
+generates:
+  src/graphql/generated.tsx:
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+      # - 'graphql-codegen-apollo-next-ssr'

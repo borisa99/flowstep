@@ -1,0 +1,10 @@
+table:
+  schema: public
+  name: user_subscription_card_details
+object_relationships:
+  - name: payment_provider_value
+    using:
+      foreign_key_constraint_on: payment_provider
+  - name: user_subscription
+    using:
+      foreign_key_constraint_on: user_subscription_id

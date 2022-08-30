@@ -1,0 +1,5 @@
+query StipeSession($subscription_plan_id: String!) {
+  stripe_session(subscription_plan_id: $subscription_plan_id) {
+    value
+  }
+}

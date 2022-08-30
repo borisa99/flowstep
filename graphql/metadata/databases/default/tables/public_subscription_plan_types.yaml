@@ -1,0 +1,27 @@
+table:
+  schema: public
+  name: subscription_plan_types
+is_enum: true
+array_relationships:
+  - name: subscription_plans
+    using:
+      foreign_key_constraint_on:
+        column: subscription_plan_type
+        table:
+          schema: public
+          name: subscription_plans
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - value
+        - comment
+      filter: {}
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - value
+        - comment
+      filter: {}
+      allow_aggregations: true

@@ -1,0 +1,85 @@
+actions:
+  - name: change_password
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_URL}}/user/change_password'
+      forward_client_headers: true
+    permissions:
+      - role: user
+    comment: Chagne password for authenticated user
+  - name: checkEmail
+    definition:
+      kind: ""
+      handler: '{{ACTION_BASE_URL}}/auth/check_email'
+    permissions:
+      - role: public
+  - name: google_url
+    definition:
+      kind: ""
+      handler: '{{ACTION_BASE_URL}}/auth/google_url'
+      request_transform:
+        method: GET
+        version: 1
+        query_params: {}
+        template_engine: Kriti
+    permissions:
+      - role: public
+  - name: invite
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_URL}}/auth/invite'
+      forward_client_headers: true
+    permissions:
+      - role: super_admin
+  - name: login
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_URL}}/auth/login'
+    permissions:
+      - role: public
+  - name: me
+    definition:
+      kind: ""
+      handler: '{{ACTION_BASE_URL}}/user/me'
+      forward_client_headers: true
+    permissions:
+      - role: user
+  - name: register
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_URL}}/auth/register'
+    permissions:
+      - role: public
+  - name: request_reset_password
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_URL}}/auth/request_reset_password'
+    permissions:
+      - role: public
+  - name: reset_password
+    definition:
+      kind: synchronous
+      handler: '{{ACTION_BASE_URL}}/auth/reset_password'
+    permissions:
+      - role: public
+  - name: stripe_session
+    definition:
+      kind: ""
+      handler: '{{ACTION_BASE_URL}}/stripe/create_checkout_session'
+      forward_client_headers: true
+    permissions:
+      - role: free
+    comment: Generate stripe checkout session
+custom_types:
+  enums: []
+  input_objects:
+    - name: RegisterUser
+    - name: SampleInput
+    - name: GoogleProfile
+  objects:
+    - name: JWTResponse
+    - name: SuccessResponse
+    - name: UserResponse
+    - name: SampleOutput
+    - name: SuccessResponseBoolean
+  scalars: []

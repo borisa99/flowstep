@@ -1,0 +1,176 @@
+table:
+  schema: public
+  name: flow_app_info
+object_relationships:
+  - name: flow
+    using:
+      foreign_key_constraint_on: flow_id
+insert_permissions:
+  - role: premium
+    permission:
+      check: {}
+      columns:
+        - id
+        - category
+        - number_of_downloads
+        - average_rating
+        - website
+        - developer
+        - app_store_link
+        - release_date
+        - flow_id
+        - created_at
+        - updated_at
+  - role: super_admin
+    permission:
+      check: {}
+      columns:
+        - id
+        - category
+        - number_of_downloads
+        - average_rating
+        - website
+        - developer
+        - app_store_link
+        - release_date
+        - flow_id
+        - created_at
+        - updated_at
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - number_of_downloads
+        - average_rating
+        - app_store_link
+        - category
+        - developer
+        - website
+        - created_at
+        - release_date
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        flow:
+          _or:
+            - is_draft:
+                _eq: false
+            - user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - number_of_downloads
+        - average_rating
+        - app_store_link
+        - category
+        - developer
+        - website
+        - created_at
+        - release_date
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        flow:
+          is_draft:
+            _eq: false
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - number_of_downloads
+        - average_rating
+        - app_store_link
+        - category
+        - developer
+        - website
+        - created_at
+        - release_date
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        flow:
+          _or:
+            - is_draft:
+                _eq: false
+            - user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - number_of_downloads
+        - average_rating
+        - app_store_link
+        - category
+        - developer
+        - website
+        - created_at
+        - release_date
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        flow:
+          _or:
+            - is_draft:
+                _eq: false
+            - user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: premium
+    permission:
+      columns:
+        - app_store_link
+        - average_rating
+        - category
+        - developer
+        - number_of_downloads
+        - release_date
+        - website
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      columns:
+        - app_store_link
+        - average_rating
+        - category
+        - developer
+        - number_of_downloads
+        - release_date
+        - website
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: premium
+    permission:
+      backend_only: false
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      backend_only: false
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id

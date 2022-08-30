@@ -1,0 +1,6 @@
+query FlowComponents {
+  flow_components {
+    value
+    comment
+  }
+}

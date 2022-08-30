@@ -1,0 +1,5 @@
+mutation InsertCollectionFlow($object: collection_flows_insert_input!) {
+  insert_collection_flows_one(object: $object) {
+    collection_id
+  }
+}

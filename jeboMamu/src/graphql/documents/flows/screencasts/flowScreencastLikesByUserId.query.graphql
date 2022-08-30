@@ -1,0 +1,27 @@
+query FlowScreencastLikesByUserId($userId: uuid!) {
+  flow_screencast_likes(where: { user_id: { _eq: $userId } }) {
+    flow_screencast_id
+    id
+    user_id
+    created_at
+    flow_screencast {
+      banner_url
+      flow_id
+      screencast_url
+      title
+      id
+      updated_at
+      created_at
+      flow {
+        id
+        avatar_background_color
+        avatar_url
+        created_at
+        is_draft
+        title
+        updated_at
+        user_id
+      }
+    }
+  }
+}

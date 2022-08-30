@@ -1,0 +1,5 @@
+query AppById($id: uuid!) {
+  flows_by_pk(id: $id) {
+    ...App
+  }
+}

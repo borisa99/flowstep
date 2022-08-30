@@ -1,0 +1,145 @@
+table:
+  schema: public
+  name: flow_screenshots
+object_relationships:
+  - name: flow
+    using:
+      foreign_key_constraint_on: flow_id
+insert_permissions:
+  - role: premium
+    permission:
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+        - title
+        - url
+        - created_at
+        - updated_at
+        - flow_id
+        - id
+  - role: super_admin
+    permission:
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+        - title
+        - url
+        - created_at
+        - updated_at
+        - flow_id
+        - id
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - title
+        - url
+        - created_at
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        _or:
+          - flow:
+              is_draft:
+                _eq: false
+          - flow:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - title
+        - url
+        - created_at
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        flow:
+          is_draft:
+            _eq: false
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - title
+        - url
+        - created_at
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        _or:
+          - flow:
+              is_draft:
+                _eq: false
+          - flow:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - title
+        - url
+        - created_at
+        - updated_at
+        - flow_id
+        - id
+      filter:
+        _or:
+          - flow:
+              is_draft:
+                _eq: false
+          - flow:
+              user_id:
+                _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: premium
+    permission:
+      columns:
+        - title
+        - url
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      columns:
+        - title
+        - url
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: premium
+    permission:
+      backend_only: false
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      backend_only: false
+      filter:
+        flow:
+          user_id:
+            _eq: X-Hasura-User-Id

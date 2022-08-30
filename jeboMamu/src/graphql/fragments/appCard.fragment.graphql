@@ -1,0 +1,9 @@
+fragment AppCard on flows {
+  ...Flow
+  screencasts: flow_screencasts(limit: 1, order_by: { created_at: asc }) {
+    ...FlowScreencast
+  }
+  app_info: flow_app_info {
+    category
+  }
+}

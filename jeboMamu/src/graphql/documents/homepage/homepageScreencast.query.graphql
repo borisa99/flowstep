@@ -1,0 +1,25 @@
+query ScreencastCardById($id: uuid!) {
+  flow_screencasts_by_pk(id: $id) {
+    ...FlowScreencast
+    is_liked
+    is_saved
+    created_at
+    flow_screencast_timestamps {
+      ...FlowScreencastTimestamp
+    }
+    flow_screencast_components {
+      ...FlowScreencastComponent
+    }
+    flow_screencast_details {
+      ...FlowScreencastDetails
+    }
+    flow_screencast_likes_aggregate {
+      aggregate {
+        count
+      }
+    }
+    flow {
+      title
+    }
+  }
+}

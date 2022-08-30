@@ -1,0 +1,51 @@
+table:
+  schema: public
+  name: subscription_plans
+object_relationships:
+  - name: subscriptionPlanType
+    using:
+      foreign_key_constraint_on: subscription_plan_type
+array_relationships:
+  - name: user_checkout_sessions
+    using:
+      foreign_key_constraint_on:
+        column: subscription_plan_id
+        table:
+          schema: public
+          name: user_checkout_sessions
+  - name: user_subscriptions
+    using:
+      foreign_key_constraint_on:
+        column: subscription_plan_id
+        table:
+          schema: public
+          name: user_subscriptions
+select_permissions:
+  - role: public
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - price
+        - short_description
+        - stripe_price_id
+        - subscription_plan_type
+        - title
+        - updated_at
+      filter: {}
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - description
+        - id
+        - price
+        - short_description
+        - stripe_price_id
+        - subscription_plan_type
+        - title
+        - updated_at
+      filter: {}
+      allow_aggregations: true

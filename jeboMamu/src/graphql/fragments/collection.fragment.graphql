@@ -1,0 +1,10 @@
+fragment Collection on collections {
+  id
+  title
+  avatar_backgorund_color
+  avatar_url
+  collection_badge_value
+  collection_visibility_value
+  created_at
+  updated_at
+}

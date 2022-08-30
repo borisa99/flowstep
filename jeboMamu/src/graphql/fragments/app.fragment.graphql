@@ -1,0 +1,22 @@
+fragment App on flows {
+  ...Flow
+  user_id
+  flow_screencasts {
+    ...FlowScreencast
+    flow_screencast_components {
+      ...FlowScreencastComponent
+    }
+    flow_screencast_timestamps {
+      ...FlowScreencastTimestamp
+    }
+  }
+  flow_screenshots {
+    ...FlowScreenshot
+  }
+  flow_app_info {
+    ...FlowAppInfo
+  }
+  flow_attachments {
+    ...FlowAttachment
+  }
+}

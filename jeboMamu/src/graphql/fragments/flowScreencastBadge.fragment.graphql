@@ -1,0 +1,5 @@
+fragment FlowScreencastBadge on flow_screencasts_badges {
+  id
+  flow_badge_value
+  created_at
+}

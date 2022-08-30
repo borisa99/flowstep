@@ -1,0 +1,6 @@
+mutation SignUp($user: RegisterUser!) {
+  register(user: $user) {
+    token
+    refresh_token
+  }
+}

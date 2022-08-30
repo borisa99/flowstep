@@ -1,0 +1,5 @@
+query AllSubscriptionPlans {
+  subscription_plans(order_by: { price: desc }) {
+    ...SubscriptionPlan
+  }
+}

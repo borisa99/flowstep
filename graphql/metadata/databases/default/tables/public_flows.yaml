@@ -1,0 +1,187 @@
+table:
+  schema: public
+  name: flows
+object_relationships:
+  - name: flow_app_info
+    using:
+      foreign_key_constraint_on:
+        column: flow_id
+        table:
+          schema: public
+          name: flow_app_info
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+array_relationships:
+  - name: flow_attachments
+    using:
+      foreign_key_constraint_on:
+        column: flow_id
+        table:
+          schema: public
+          name: flow_attachments
+  - name: flow_badge_values
+    using:
+      foreign_key_constraint_on:
+        column: flow_id
+        table:
+          schema: public
+          name: flow_badge_values
+  - name: flow_keywords
+    using:
+      foreign_key_constraint_on:
+        column: flow_id
+        table:
+          schema: public
+          name: flow_keywords
+  - name: flow_screencasts
+    using:
+      foreign_key_constraint_on:
+        column: flow_id
+        table:
+          schema: public
+          name: flow_screencasts
+  - name: flow_screenshots
+    using:
+      foreign_key_constraint_on:
+        column: flow_id
+        table:
+          schema: public
+          name: flow_screenshots
+insert_permissions:
+  - role: premium
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+        - avatar_background_color
+        - avatar_url
+        - created_at
+        - id
+        - is_draft
+        - title
+        - user_id
+  - role: super_admin
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-User-Id
+      columns:
+        - avatar_background_color
+        - avatar_url
+        - created_at
+        - id
+        - is_draft
+        - title
+        - user_id
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - is_draft
+        - avatar_background_color
+        - avatar_url
+        - title
+        - created_at
+        - updated_at
+        - id
+        - user_id
+      filter:
+        _or:
+          - is_draft:
+              _eq: false
+          - user_id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - is_draft
+        - avatar_background_color
+        - avatar_url
+        - title
+        - created_at
+        - updated_at
+        - id
+        - user_id
+      filter:
+        is_draft:
+          _eq: false
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - is_draft
+        - avatar_background_color
+        - avatar_url
+        - title
+        - created_at
+        - updated_at
+        - id
+        - user_id
+      filter:
+        _or:
+          - is_draft:
+              _eq: false
+          - user_id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - is_draft
+        - avatar_background_color
+        - avatar_url
+        - title
+        - created_at
+        - updated_at
+        - id
+        - user_id
+      filter:
+        _or:
+          - is_draft:
+              _eq: false
+          - user_id:
+              _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: premium
+    permission:
+      columns:
+        - avatar_background_color
+        - avatar_url
+        - is_draft
+        - title
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      columns:
+        - avatar_background_color
+        - avatar_url
+        - is_draft
+        - title
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+delete_permissions:
+  - role: premium
+    permission:
+      backend_only: false
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      backend_only: false
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

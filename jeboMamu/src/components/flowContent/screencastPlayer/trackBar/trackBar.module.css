@@ -1,0 +1,4 @@
+.trackbar-section:hover > div {
+  visibility: visible;
+  transform: translateX(-50%);
+}

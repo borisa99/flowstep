@@ -1,0 +1,146 @@
+table:
+  schema: public
+  name: flow_screencast_details
+object_relationships:
+  - name: flow_screencast
+    using:
+      foreign_key_constraint_on: flow_screencast_id
+insert_permissions:
+  - role: premium
+    permission:
+      check: {}
+      columns:
+        - app_version
+        - platform_version
+        - region
+        - created_at
+        - updated_at
+        - flow_screencast_id
+        - id
+  - role: super_admin
+    permission:
+      check: {}
+      columns:
+        - app_version
+        - platform_version
+        - region
+        - created_at
+        - updated_at
+        - flow_screencast_id
+        - id
+select_permissions:
+  - role: premium
+    permission:
+      columns:
+        - app_version
+        - platform_version
+        - region
+        - created_at
+        - updated_at
+        - flow_screencast_id
+        - id
+      filter:
+        flow_screencast:
+          flow:
+            _or:
+              - is_draft:
+                  _eq: false
+              - user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns:
+        - app_version
+        - platform_version
+        - region
+        - created_at
+        - updated_at
+        - flow_screencast_id
+        - id
+      filter:
+        flow_screencast:
+          flow:
+            is_draft:
+              _eq: false
+      allow_aggregations: true
+  - role: super_admin
+    permission:
+      columns:
+        - app_version
+        - platform_version
+        - region
+        - created_at
+        - updated_at
+        - flow_screencast_id
+        - id
+      filter:
+        flow_screencast:
+          flow:
+            _or:
+              - is_draft:
+                  _eq: false
+              - user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true
+  - role: user
+    permission:
+      columns:
+        - app_version
+        - platform_version
+        - region
+        - created_at
+        - updated_at
+        - flow_screencast_id
+        - id
+      filter:
+        flow_screencast:
+          flow:
+            _or:
+              - is_draft:
+                  _eq: false
+              - user_id:
+                  _eq: X-Hasura-User-Id
+      allow_aggregations: true
+update_permissions:
+  - role: premium
+    permission:
+      columns:
+        - app_version
+        - platform_version
+        - region
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check: null
+  - role: super_admin
+    permission:
+      columns:
+        - app_version
+        - platform_version
+        - region
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: premium
+    permission:
+      backend_only: false
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id
+  - role: super_admin
+    permission:
+      backend_only: false
+      filter:
+        flow_screencast:
+          flow:
+            user_id:
+              _eq: X-Hasura-User-Id

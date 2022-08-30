@@ -1,0 +1,8 @@
+query Collection($id: uuid!) {
+  collections_by_pk(id: $id) {
+    ...Collection
+    collection_flows {
+      ...CollectionFlow
+    }
+  }
+}

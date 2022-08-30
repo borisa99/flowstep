@@ -1,0 +1,10 @@
+table:
+  schema: public
+  name: flow_badge_values
+object_relationships:
+  - name: flow
+    using:
+      foreign_key_constraint_on: flow_id
+  - name: flow_badge
+    using:
+      foreign_key_constraint_on: flow_badge_value

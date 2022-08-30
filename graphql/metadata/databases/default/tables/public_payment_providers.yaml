@@ -1,0 +1,12 @@
+table:
+  schema: public
+  name: payment_providers
+is_enum: true
+array_relationships:
+  - name: user_subscription_card_details
+    using:
+      foreign_key_constraint_on:
+        column: payment_provider
+        table:
+          schema: public
+          name: user_subscription_card_details

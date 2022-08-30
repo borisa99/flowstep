@@ -1,0 +1,4 @@
+fragment FlowScreencastComponent on flow_screencast_components {
+  id
+  flow_component_value
+}

@@ -1,0 +1,5 @@
+fragment CollectionFlow on collection_flows {
+  flow_screencast {
+    ...ScreencastCard
+  }
+}
